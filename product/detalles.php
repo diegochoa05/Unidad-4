@@ -57,18 +57,7 @@
         <ul class="list-unstyled components">
             <p>Dummy Heading</p>
             <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
+            <a href="#">Home</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -126,8 +115,8 @@
                                 <h5 class="card-title text-center">Card title</h5>
                                 <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 <a href="#" class="btn btn-primary">Editar</a>
-                                <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
-                                <a href="detalles.php" class="btn btn-primary">Detalles</a>
+                                <a href="#" class="btn btn-primary" on>Eliminar</a>
+                                <a href="#" class="btn btn-primary">Detalles</a>
                               </div>
                             </div>
                             </div>
@@ -147,14 +136,15 @@
             </div>
             <div class="modal-body">
 
-            <?php for ($i=0; $i < 6; $i++): ?>
+    
 
               <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">@</span>
-              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                
+              </div>
             
-            <?php endfor ?>
+            
               
             </div>
             <div class="modal-footer">
@@ -164,6 +154,26 @@
           </div>
         </div>
       </div>
+
+      <script type="text/javascript">
+        function remove(){
+          swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success",
+            });
+          } else {
+            swal("Your imaginary file is safe!");
+          }
+        });
+        }
 
 
 

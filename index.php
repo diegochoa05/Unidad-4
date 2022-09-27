@@ -62,18 +62,22 @@
                 repudiandae quod, sapiente sit voluptatibus dignissimos?
             </p>
             <br>
-            <form method="get" action="product">
+            <form method="post" action="app/Auth.php">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
 
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
 
+            <input type="hidden" value="access" name="action"> 
+            
             <button type="submit" class="btn btn-outline-primary">Entrar</button>
+            
+            
 
               
             </form>
