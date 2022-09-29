@@ -48,6 +48,7 @@ Class Auth{
 
             session_start();
 
+            $_SESSION['id']= $response->data->id;
             $_SESSION['name']= $response->data->name;
             $_SESSION['lastname'] = $response->data->lastname;
             $_SESSION['avatar'] = $response->data->avatar;
