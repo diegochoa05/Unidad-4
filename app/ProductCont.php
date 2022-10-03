@@ -11,10 +11,11 @@ if (isset($_POST['action'])){
             $description = strip_tags($_POST['description']);
             $features = strip_tags($_POST['features']);
             $brand_id = strip_tags($_POST['brand_id']);
+            $img = $_FILES['img']['tmp_name'];
 
             $productCont = new ProductCont();
 
-            $productCont->createProd($name, $slug, $description, $features, $brand_id);
+            $productCont->createProd($name, $slug, $description, $features, $brand_id, $img);
 
 
     }
@@ -58,7 +59,7 @@ if (isset($_POST['action'])){
 
     }
 
-    public function createProd($name, $slug, $description, $features, $brand_id)
+    public function createProd($name, $slug, $description, $features, $brand_id, $img)
     {
 
         $curl = curl_init();
@@ -76,7 +77,7 @@ if (isset($_POST['action'])){
             'Authorization: Bearer ' . $_SESSION['token']
             
         ),
-        CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id),
+        CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id, 'cover' => new CURLFILE($img)),
         ));
 
         

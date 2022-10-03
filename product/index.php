@@ -2,7 +2,7 @@
 
   include "../app/ProductCont.php";
   $prod = new ProductCont();
-  $products = $prod->productsApi();
+  $product = $prod->productsApi();
 ?>
 
 <!DOCTYPE html>
@@ -45,21 +45,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <?php for ($i=0; $i < 10; $i++): ?>
+
+                    <?php if (isset($product) && count($product)>0): ?>
+                          <?php foreach($product as $productAct): ?>
 
                             <div class="col-md-3 col-sm-12 p-2">
                             <div class="card" style="width: 18rem;">
-                              <img src="<?php echo $products[$i]->cover?>" class="card-img-top" alt="...">
+                              <img src="<?php echo $productAct->cover?>" class="card-img-top" alt="...">
                               <div class="card-body">
-                                <h5 class="card-title text-center"><?php echo $products[$i]->name ?></h5>
-                                <p class="card-text text-center"><?php echo $products[$i]->description ?></p>
+                                <h5 class="card-title text-center"><?php echo $productAct->name ?></h5>
+                                <p class="card-text text-center"><?php echo $productAct->description ?></p>
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
                                 <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
                                 <a href="detalles.php" class="btn btn-primary" >Detalles</a>
                               </div>
                             </div>
                             </div>
-                        <?php endfor ?>
+                         <?php endforeach ?> 
+                      <?php endif ?>
                     </div>
                 </div>
             </div>
@@ -77,7 +80,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="post" action="../app/ProductCont.php">
+            <form enctype="multipart/form-data" method="post" action="../app/ProductCont.php">
               
               <input type="hidden" name="action" value="create">
               
@@ -87,24 +90,23 @@
               
 
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input name="name" type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input name="slug" type="text" class="form-control" placeholder="Product slug" aria-label="Username" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input name="description" type="text" class="form-control" placeholder="Product description" aria-label="Username" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input name="features" type="text" class="form-control" placeholder="Product features" aria-label="Username" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input name="brand_id" type="text" class="form-control" placeholder="Product brand_id" aria-label="Username" aria-describedby="basic-addon1">
+
+                <div class="input-group mb-3">
+                
+                <input name="img" type="file" class="form-control" placeholder="Product cover" aria-label="Username" aria-describedby="basic-addon1">
 
 
               </div>
