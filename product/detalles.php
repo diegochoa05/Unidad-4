@@ -1,3 +1,10 @@
+<?php
+
+  include "../app/ProductCont.php";
+  $prod = new ProductCont();
+  $gSlug = $prod->getSlug($_GET['slug']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,42 +34,63 @@
                 <div class="container-fluid">
                     <div class="border-buttom">
                         <div class="row m-2">
-                            <div class="col">
-                                <h4>Productos</h4>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#createProductModal">
-                                    Añador Productos
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-
-                        <div class="col-md-3 col-sm-12 p-2">
-                        <div class="card" style="width: 18rem;">
-                          <img src="../public/img/meme.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title text-center">Card title</h5>
-                            <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-                            <div class="text-center">
-                              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
-                              <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
-                            </div>
-                            
+                  
                           </div>
-                        </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
+                          <div class="row">
+                            
+                            
+                            <div class="col-md-3 col-sm-12 p-2">
+                              <div class="card" style="width: 18rem;">
+                                <img src="<?php echo $gSlug->cover?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <h5 class="card-title text-center"><?php echo $gSlug->name?></h5>
+                                  <p class="card-text text-center"><?php echo $gSlug->description?></p>
+                                  
+                                  <div class="text-center">
+                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
+                                    <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
+                                  </div>
 
-      </div>
+                                  
+                                </div>
+                              </div>
+
+                              <p class="card-text"> BRAND:</p>
+
+                              <p class="card-text"><?php echo $gSlug->brand->name; ?></p>
+
+                              <p class="card-text">FEATURES:</p>
+
+                              <p class="card-text"><?php echo $gSlug->features; ?></p>
+
+                              <p class="card-text">CATEGORIES:</p>
+
+                              <?php foreach($gSlug->categories as $categ){ ?>
+                                  <ul class="list-group">
+                                    <li class="list-group-item"><?php echo $categ->name; ?></li>
+                                  </ul>
+                              <?php } ?>
+
+                              <p class="card-text">TAGS:</p>
+
+
+                              <?php foreach($gSlug->tags as $tag){ ?>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><?php echo $tag->name; ?></li>
+                                  </ul>
+                              <?php } ?>
+                    </div>
+                    
+                    
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
           
-        </div>
 
         <!-- Modal -->
       <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

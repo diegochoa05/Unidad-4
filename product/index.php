@@ -58,7 +58,7 @@
                                 <p class="card-text text-center"><?php echo $productAct->description ?></p>
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
                                 <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
-                                <a href="detalles.php" class="btn btn-primary" >Detalles</a>
+                                <a href="detalles.php?slug=<?php echo $productAct->slug?>" class="btn btn-primary" >Detalles</a>
                               </div>
                             </div>
                             </div>
