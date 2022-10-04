@@ -3,6 +3,7 @@
   include "../app/ProductCont.php";
   $prod = new ProductCont();
   $product = $prod->productsApi();
+  $brands = $prod->allBrands();
 ?>
 
 <!DOCTYPE html>
@@ -84,30 +85,33 @@
               
               <input type="hidden" name="action" value="create">
               
-              
               <div class="modal-body">
                 
-              
+                <div class="input-group mb-3">
+                <input name="name" type="text" class="form-control" placeholder="Product name" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="basic-addon1">
+                <input name="slug" type="text" class="form-control" placeholder="Product slug" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="slug" type="text" class="form-control" placeholder="Product slug" aria-label="Username" aria-describedby="basic-addon1">
+                <input name="description" type="text" class="form-control" placeholder="Product description" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="description" type="text" class="form-control" placeholder="Product description" aria-label="Username" aria-describedby="basic-addon1">
+                <input name="features" type="text" class="form-control" placeholder="Product features" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="features" type="text" class="form-control" placeholder="Product features" aria-label="Username" aria-describedby="basic-addon1">
+
+                <select name="brand_id" class="form-select">
+                  <?php foreach ($brands as $brand){?>
+                    <option value="<?php echo $brand->id;?>" class="dropdown-item"><?php echo $brand->name;?></option>
+                  <?php } ?>
+                </select>
+
+
+            </div>
 
                 <div class="input-group mb-3">
-                <input name="brand_id" type="text" class="form-control" placeholder="Product brand_id" aria-label="Username" aria-describedby="basic-addon1">
-
-                <div class="input-group mb-3">
-                
-                <input name="img" type="file" class="form-control" placeholder="Product cover" aria-label="Username" aria-describedby="basic-addon1">
-
+                <input name="img" type="file" class="form-control" placeholder="Product cover" aria-describedby="basic-addon1">
 
               </div>
               
