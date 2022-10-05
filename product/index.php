@@ -39,7 +39,7 @@
                                 <h4>Productos</h4>
                             </div>
                             <div class="col">
-                                <button class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#createProductModal">
+                                <button onclick="addPorduct()"class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#createProductModal">
                                     Añador Productos
                                 </button>
                             </div>
@@ -56,7 +56,7 @@
                               <div class="card-body">
                                 <h5 class="card-title text-center"><?php echo $productAct->name ?></h5>
                                 <p class="card-text text-center"><?php echo $productAct->description ?></p>
-                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
+                                <a data-product='<?php echo json_encode($productAct)?>' onclick="editProduct(this)" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
                                 <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
                                 <a href="detalles.php?slug=<?php echo $productAct->slug?>" class="btn btn-primary" >Detalles</a>
                               </div>
@@ -83,27 +83,27 @@
 
             <form enctype="multipart/form-data" method="post" action="../app/ProductCont.php">
               
-              <input type="hidden" name="action" value="create">
-              
+              <input id="oculto_input" type="hidden" name="action" value="create">
+               
               <div class="modal-body">
                 
                 <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Product name" aria-describedby="basic-addon1">
+                <input name="name" type="text" class="form-control" id="name" placeholder="Product name" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="slug" type="text" class="form-control" placeholder="Product slug" aria-describedby="basic-addon1">
+                <input name="slug" type="text" class="form-control" id="slug" placeholder="Product slug" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="description" type="text" class="form-control" placeholder="Product description" aria-describedby="basic-addon1">
+                <input name="description" type="text" class="form-control" id="description" placeholder="Product description" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
-                <input name="features" type="text" class="form-control" placeholder="Product features" aria-describedby="basic-addon1">
+                <input name="features" type="text" class="form-control" id="features" placeholder="Product features" aria-describedby="basic-addon1">
 
                 <div class="input-group mb-3">
 
-                <select name="brand_id" class="form-select">
+                <select name="brand_id" id="brand_id" class="form-select">
                   <?php foreach ($brands as $brand){?>
-                    <option value="<?php echo $brand->id;?>" class="dropdown-item"><?php echo $brand->name;?></option>
+                    <option value='<?php echo $brand->id;?>' class="dropdown-item"><?php echo $brand->name;?></option>
                   <?php } ?>
                 </select>
 
@@ -120,8 +120,11 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button @onclick="addProduct()" onclick="addProduct" type="submit" class="btn btn-primary">Save changes</button>
             </div>
+
+            <input id="oculto_input" type="hidden" name="action" value="create">
+            <input id="id" type="hidden" name="id" value="edit">
 
             </form>
           </div>
@@ -146,6 +149,27 @@
               swal("Your imaginary file is safe!");
             }
           });
+        }
+
+        function addProduct(){
+
+          document.getElementById("oculto_input").value = "create";
+
+        }
+
+        function editProduct(target){
+
+          document.getElementById("oculto_input").value = "update";
+
+            let products = JSON.parse(target.getAttribute("data-product"));
+
+            document.getElementById("name").value = products.name;
+            document.getElementById("slug").value = products.slug;
+            document.getElementById("description").value = products.description;
+            document.getElementById("features").value = products.features;
+            document.getElementById("brand_id").value = products.brand_id;
+            document.getElementById("id").value = products.id;
+
         }
       </script>
 

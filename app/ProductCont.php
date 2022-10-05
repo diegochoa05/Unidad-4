@@ -17,6 +17,20 @@ if (isset($_POST['action'])){
 
             $productCont->createProd($name, $slug, $description, $features, $brand_id, $img);
 
+            break;
+
+        case 'update':
+
+            $name = strip_tags($_POST['name']);
+            $slug = strip_tags($_POST['slug']);
+            $description = strip_tags($_POST['description']);
+            $features = strip_tags($_POST['features']);
+            $brand_id = strip_tags($_POST['brand_id']);
+            $id = strip_tags($_POST['id']);
+
+            $productController = new ProductController();
+            $productController->edit($name, $slug, $description, $features, $brand_id, $id);
+
     }
 }
 
@@ -154,6 +168,34 @@ if (isset($_POST['action'])){
         } else {
             return [];
         }
+    }
+
+    public function edit($name, $slug, $description, $features, $brand_id, $id)
+    {
+        $curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'PUT',
+		CURLOPT_POSTFIELDS => 'name='.$name.'&slug='.$slug.'&description='.$description.'&features='.$features.'&brand_id='.$brand_id.'&id='.$id,
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$response = json_decode($response);
+
+		if (isset($response->code) && $response->code > 0) {
+            header("Location:../product?success=true");
+		}else{
+			header("Location:../product?error=true");
+		}
     }
     
     }
