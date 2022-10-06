@@ -35,7 +35,7 @@
                 repudiandae quod, sapiente sit voluptatibus dignissimos?
             </p>
             <br>
-            <form method="post" action="app/Auth.php">
+            <form method="post" action="auth">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Correo</label>
               <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

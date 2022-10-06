@@ -2,6 +2,8 @@
 
 include_once "config.php";
 
+// echo "Hola ";
+
 if (isset($_POST['action'])){
 
     if (isset($_POST['global_token']) && $_POST['global_token'] == $_SESSION['global_token']){
