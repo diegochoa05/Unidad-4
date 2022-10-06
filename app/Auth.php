@@ -1,7 +1,13 @@
 <?php
 
+include_once "config.php";
 
 if (isset($_POST['action'])){
+
+    if (isset($_POST['global_token']) && $_POST['global_token'] == $_SESSION['global_token']){
+        
+    }
+
     switch($_POST['action']){
         case 'access':
 
@@ -46,7 +52,6 @@ Class Auth{
         if ( isset($response->code) && $response->code>0)
         {
 
-            session_start();
 
             $_SESSION['id']= $response->data->id;
             $_SESSION['name']= $response->data->name;

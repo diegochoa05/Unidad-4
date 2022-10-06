@@ -1,5 +1,4 @@
 <?php
-
   include "../app/ProductCont.php";
   $prod = new ProductCont();
   $product = $prod->productsApi();
@@ -57,7 +56,7 @@
                                 <h5 class="card-title text-center"><?php echo $productAct->name ?></h5>
                                 <p class="card-text text-center"><?php echo $productAct->description ?></p>
                                 <a data-product='<?php echo json_encode($productAct)?>' onclick="editProduct(this)" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
-                                <a href="#" class="btn btn-primary" onclick="remove()">Eliminar</a>
+                                <a href="#" onclick="remove(<?php echo $productAct->id ?>)"  class="btn btn-primary" onclick="remove()">Eliminar</a>
                                 <a href="detalles.php?slug=<?php echo $productAct->slug?>" class="btn btn-primary" >Detalles</a>
                               </div>
                             </div>
@@ -124,9 +123,9 @@
             </div>
 
             <input id="oculto_input" type="hidden" name="action" value="create">
-            <input id="id" type="hidden" name="id" value="edit">
-
-            </form>
+            <input id="id" type="hidden" name="id">
+            
+          </form>
           </div>
         </div>
       </div>
@@ -145,6 +144,13 @@
               swal("Poof! Your imaginary file has been deleted!", {
                 icon: "success",
               });
+              var bodyFormData = new FormData();
+                bodyFormData.append('id', id);
+                bodyFormData.append('action', 'delete');
+
+                axios.post('../app/productController.php', bodyFormData)
+                .then(function (response){
+                    console.log(response);
             } else {
               swal("Your imaginary file is safe!");
             }
