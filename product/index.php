@@ -56,7 +56,7 @@
                                 <h5 class="card-title text-center"><?php echo $productAct->name ?></h5>
                                 <p class="card-text text-center"><?php echo $productAct->description ?></p>
                                 <a data-product='<?php echo json_encode($productAct)?>' onclick="editProduct(this)" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
-                                <a href="#" onclick="remove(<?php echo $productAct->id ?>)"  class="btn btn-primary" onclick="remove()">Eliminar</a>
+                                <a href="#" onclick="remove(<?php echo $productAct->id ?>)"  class="btn btn-primary">Eliminar</a>
                                 <a href="detalles.php?slug=<?php echo $productAct->slug?>" class="btn btn-primary" >Detalles</a>
                               </div>
                             </div>
@@ -81,9 +81,7 @@
             </div>
 
             <form enctype="multipart/form-data" method="post" action="../app/ProductCont.php">
-              
-              <input id="oculto_input" type="hidden" name="action" value="create">
-               
+                             
               <div class="modal-body">
                 
                 <div class="input-group mb-3">
@@ -123,7 +121,7 @@
             </div>
 
             <input id="oculto_input" type="hidden" name="action" value="create">
-            <input id="id" type="hidden" name="id">
+            <input id="id" type="hidden" name="id" value="update">
             
           </form>
           </div>
@@ -131,7 +129,7 @@
       </div>
 
       <script>
-        function remove(){
+        function remove(id){
           swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -148,9 +146,13 @@
                 bodyFormData.append('id', id);
                 bodyFormData.append('action', 'delete');
 
-                axios.post('../app/productController.php', bodyFormData)
+                axios.post('../app/ProductCont.php', bodyFormData)
                 .then(function (response){
                     console.log(response);
+                  })
+                    .catch(function (error){
+                        console.log('error')
+                    })
             } else {
               swal("Your imaginary file is safe!");
             }
@@ -168,6 +170,7 @@
           document.getElementById("oculto_input").value = "update";
 
             let products = JSON.parse(target.getAttribute("data-product"));
+
 
             document.getElementById("name").value = products.name;
             document.getElementById("slug").value = products.slug;

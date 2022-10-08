@@ -62,9 +62,9 @@ Class Auth{
             $_SESSION['token'] = $response->data->token;
 
 
-            header("Location:../product/");
+            header("Location:".BASE_PATH."product");
         }else{
-            // header("Location:../?error_true");
+            header("Location:".BASE_PATH."?error_true");
         }
 
     }

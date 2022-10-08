@@ -193,44 +193,38 @@ if (isset($_POST['action'])){
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'PUT',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer '.$_SESSION['token'],
+            'Content-Type: application/x-www-form-urlencoded'
+        ),
         CURLOPT_POSTFIELDS => 
         'name='.$name.'
         &slug='.$slug.'
         &description='.$description.'
         &features='.$features.'
         &brand_id='.$brand_id.'
-        &id='.$id,
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer '.$_SESSION['token'],
-            'Content-Type: application/x-www-form-urlencoded'
-        ),
+        &id='.$id.'',
+        
         ));
-
-        echo $name;
-        echo $slug;
-        echo $description;
-        echo $features;
-        echo $brand_id;
-        echo $id;
 
         $response = curl_exec($curl);
         curl_close($curl);
         echo $response;
         $response = json_decode($response);
 
-        // if(isset($response->code) && $response->code > 0){
-        //     header("Location:../product/?success=true");
-        // }
-        // else{
-        //     header("Location:../product/?error=true");
-        // }
+        if(isset($response->code) && $response->code > 0){
+            header("Location:../product/?success=true");
+        }
+        else{
+            header("Location:../product/?error=true");
+        }
     }
     public function remove($id)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://crud.jonathansoto.mx/api/products/'.$id,
+        CURLOPT_URL => 'http://crud.jonathansoto.mx/api/products/'.$id.'',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -246,6 +240,15 @@ if (isset($_POST['action'])){
         $response = curl_exec($curl);
 
         curl_close($curl);
+
+        $response = json_decode($response);
+
+        if(isset($response->code) && $response->code > 0){
+            header("Location:../product/?success=true");
+        }
+        else{
+            header("Location:../product/?error=true");
+        }
     }
     
     }
