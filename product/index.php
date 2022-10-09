@@ -122,6 +122,7 @@
 
             <input id="oculto_input" type="hidden" name="action" value="create">
             <input id="id" type="hidden" name="id" value="update">
+            <input type="hidden" value="global_token" name="<?php echo $_SESSION['global_token'] ?>">
             
           </form>
           </div>
@@ -142,10 +143,10 @@
               swal("Poof! Your imaginary file has been deleted!", {
                 icon: "success",
               });
-              var bodyFormData = new FormData();
+                var bodyFormData = new FormData();
                 bodyFormData.append('id', id);
                 bodyFormData.append('action', 'delete');
-
+                bodyFormData.append('global_token', '<?php $_SESSION['global_token']?>');
                 axios.post('../app/ProductCont.php', bodyFormData)
                 .then(function (response){
                     console.log(response);

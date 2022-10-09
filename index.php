@@ -52,10 +52,7 @@
 
             
             <button type="submit" class="btn btn-outline-primary">Entrar</button>
-            
-            
-
-              
+          
             </form>
           </div>
 
