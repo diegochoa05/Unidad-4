@@ -38,7 +38,7 @@
                                 <h4>Productos</h4>
                             </div>
                             <div class="col">
-                                <button onclick="addPorduct()"class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#createProductModal">
+                                <button onclick="addProduct()"class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#createProductModal">
                                     Añador Productos
                                 </button>
                             </div>
@@ -57,7 +57,7 @@
                                 <p class="card-text text-center"><?php echo $productAct->description ?></p>
                                 <a data-product='<?php echo json_encode($productAct)?>' onclick="editProduct(this)" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">Editar</a>
                                 <a href="#" onclick="remove(<?php echo $productAct->id ?>)"  class="btn btn-primary">Eliminar</a>
-                                <a href="detalles.php?slug=<?php echo $productAct->slug?>" class="btn btn-primary" >Detalles</a>
+                                <a href="<?= BASE_PATH."product/".$productAct->slug ?>" class="btn btn-primary" >Detalles</a>
                               </div>
                             </div>
                             </div>
@@ -80,7 +80,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form enctype="multipart/form-data" method="post" action="../app/ProductCont.php">
+            <form enctype="multipart/form-data" method="post" action="<?= BASE_PATH ?>frm">
                              
               <div class="modal-body">
                 
@@ -147,7 +147,7 @@
                 bodyFormData.append('id', id);
                 bodyFormData.append('action', 'delete');
                 bodyFormData.append('global_token', '<?php $_SESSION['global_token']?>');
-                axios.post('../app/ProductCont.php', bodyFormData)
+                axios.post("<?= BASE_PATH ?>del", bodyFormData)
                 .then(function (response){
                     console.log(response);
                   })

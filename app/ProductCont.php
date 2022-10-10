@@ -112,10 +112,10 @@ if (isset($_POST['action'])){
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header("Location:../product?success=true");
+            header("Location:".BASE_PATH."product");
             
         }else{
-            header("Location:../product?error=true");
+            header("Location:".BASE_PATH."?error_true");
         }
 
 
@@ -213,10 +213,10 @@ if (isset($_POST['action'])){
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header("Location:../product/?success=true");
+            header("Location:".BASE_PATH."product");
         }
         else{
-            header("Location:../product/?error=true");
+            header("Location:".BASE_PATH."?error_true");
         }
     }
     public function remove($id)
@@ -244,10 +244,10 @@ if (isset($_POST['action'])){
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header("Location:../product/?success=true");
+            header("Location:".BASE_PATH."product");
         }
         else{
-            header("Location:../product/?error=true");
+            header("Location:".BASE_PATH."?error_true");
         }
     }
     

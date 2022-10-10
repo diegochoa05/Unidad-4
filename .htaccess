@@ -3,3 +3,6 @@ RewriteEngine on
 
 #Rutas
 RewriteRule ^auth$ app/Auth.php
+RewriteRule ^frm$ app/ProductCont.php
+RewriteRule ^del$ app/ProductCont.php
+RewriteRule ^product/([^.?]+)$ product/detalles.php?slug=$1
